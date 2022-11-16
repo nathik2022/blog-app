@@ -40,6 +40,7 @@ class PostCommentController extends Controller
 
         NotifyUsersPostWasCommented::dispatch($comment)
             ->onQueue('low');
+            /* this */
         // Mail::to($post->user)->later(
         //     $when,
         //     new CommentPostedMarkdown($comment)
