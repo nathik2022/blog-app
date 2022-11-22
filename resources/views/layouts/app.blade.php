@@ -12,20 +12,28 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm mb-3">
         <h5 class="my-0 mr-md-auto font-weight-normal mb-3">Laravel App</h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
-            <a class="p-2 text-dark" href="{{ route('home.contact') }}">Contact</a>
-            <a class="p-2 text-dark" href="{{ route('posts.index') }}">Blog Posts</a>
-            <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add Blog</a>
+            <a class="p-2 text-dark" href="{{ route('home.index') }}">{{ __('Home')}}</a>
+            <a class="p-2 text-dark" href="{{ route('home.contact') }}">{{ __('Contact')}}</a>
+            <a class="p-2 text-dark" href="{{ route('posts.index') }}">{{ __('Blog Posts') }}</a>
+            <a class="p-2 text-dark" href="{{ route('posts.create') }}">{{ __('Add Blog') }}</a>
 
             @guest
                 @if(route('register'))
-                    <a class="p-2 text-dark" href="{{ route('register') }}">Register</a>
+                    <a class="p-2 text-dark" href="{{ route('register') }}">{{ __('Register') }}</a>
                 @endif    
-                <a class="p-2 text-dark" href="{{ route('login') }}">Login</a>
+                <a class="p-2 text-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
             @else
+                <a class="p-2 text-dark" 
+                    href="{{ route('users.show',['user' => Auth::user()->id]) }}">
+                    {{ __('Profile') }}
+                </a>
+                <a class="p-2 text-dark" 
+                    href="{{ route('users.edit',['user' => Auth::user()->id]) }}">
+                    {{ __('Edit Profile') }}
+                </a>
                 <a class="p-2 text-dark" href="{{ route('logout') }}" 
                   onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                  >Logout ({{ Auth::user()->name }})</a>
+                  >{{ __('Logout') }} ({{ Auth::user()->name }})</a>
 
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display:none;">
                     @csrf

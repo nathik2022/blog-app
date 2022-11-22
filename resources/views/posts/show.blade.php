@@ -73,7 +73,8 @@
         <x-tags :tags="$post->tags"></x-tags>
 
         <p>
-            Currently read by {{ $counter }} people
+            {{-- Currently read by {{ $counter }} people --}}
+            {{ trans_choice('messages.people.reading', $counter) }}
         </p>
         {{-- @endif --}}
         <h4>Comments</h4>

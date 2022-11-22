@@ -12,7 +12,7 @@
 
         @errors @enderrors
     @else
-        <a href="{{ route('login') }}">Sign-in</a> to post comments!
+        <a href="{{ route('login') }}">{{ __('Sign-in') }}</a> {{ __('to post comments!') }}
 
     @endauth
 </div>

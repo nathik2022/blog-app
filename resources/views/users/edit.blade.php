@@ -18,12 +18,24 @@
             </div>
             <div class="col-8">
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input class="form-control" value="" type="text" name="name"></input>
+                    <label for="name">{{ __('Name:') }}</label>
+                    <input class="form-control" value="{{ $user->name }}" type="text" name="name"></input>
                 </div>
+
+                <div class="form-group">
+                    <label for="language">{{ __('Language:') }}</label>
+                    <select class="form-control" name="locale">
+                        @foreach (App\Models\User::LOCALES as $locale => $label)
+                            <option value="{{ $locale }}" {{ $user->locale !== $locale ?: 'selected'}}>
+                                {{ $label }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 @errors @enderrors
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Save Changes"/>
+                    <input type="submit" class="btn btn-primary" value="{{ __('Save Changes') }}"/>
                 </div>
             </div>
         </div>

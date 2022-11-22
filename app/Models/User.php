@@ -15,6 +15,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const LOCALES = [
+        'en' => 'English',
+        'es' => 'Espanol',
+        'de' => 'Deutch'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -93,10 +99,15 @@ class User extends Authenticatable
     }
 
     public function scopeThatHasCommentedOnPost(Builder $query, BlogPost $post)
-        {
-            return $query->whereHas('comments',function ($query) use ($post){
-                return $query->where('commentable_id','=',$post->id)
-                        ->where('commentable_type', '=', BlogPost::class);
-            });
-        }
+    {
+        return $query->whereHas('comments',function ($query) use ($post){
+            return $query->where('commentable_id','=',$post->id)
+                    ->where('commentable_type', '=', BlogPost::class);
+        });
+    }
+
+    public function scopeThatIsAnAdmin(Builder $query)
+    {
+        return $query->where('is_admin',true);
+    }
 }
