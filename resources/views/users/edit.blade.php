@@ -11,7 +11,7 @@
                 <img src="{{ $user->image ? $user->image->url() : '' }}" class="img-thumbnail avatar" />
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h6>Upload a different photo with dimensions 128px x 128px</h6>
+                        <h6>{{ __('Upload a different photo with dimensions 128px x 128px') }}</h6>
                         <input class="form-control-file" type="file" name="avatar" />
                     </div>
                 </div>

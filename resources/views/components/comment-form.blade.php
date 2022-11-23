@@ -7,7 +7,7 @@
                 <textarea id="content" name="content" class="form-control"></textarea>
             </div>
             
-            <div><input type="submit" value="Add Comment" class=" btn btn-primary btn-block"></div>
+            <div><input type="submit" value="{{ __('Add Comment') }}" class=" btn btn-primary btn-block"></div>
         </form>
 
         @errors @enderrors

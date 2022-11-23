@@ -62,12 +62,12 @@
             Brand New Post!
         </x-badge> --}}
         <x-badge show="{{ now()->diffInMinutes($post->created_at) < 30 }}" type="primary">
-            New Blog Post!
+            {{ __('New Blog Post!') }}
         </x-badge>
         <x-updated :date="$post->created_at" name="{{ $post->user->name }}">
         </x-updated>
         <x-updated :date="$post->updated_at">
-            Updated
+            {{ __('Updated') }}
         </x-updated>
 
         <x-tags :tags="$post->tags"></x-tags>
@@ -77,7 +77,7 @@
             {{ trans_choice('messages.people.reading', $counter) }}
         </p>
         {{-- @endif --}}
-        <h4>Comments</h4>
+        <h4>{{ __('Comments') }}s</h4>
 
         {{-- @include('comments.partials.form') --}}
         {{-- @commentForm(['route'=>route('posts.comments.store',['post'=>$post->id])]) 

@@ -7,6 +7,7 @@ use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use App\Models\Image;
 use App\Models\User;
+use App\Services\Counter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -170,9 +171,11 @@ class PostsController extends Controller
                 ->findOrFail($id);
         });
 
-        $sessionId = session()->getId();
-        $counterKey = "blog-post-{$id}-counter";
-        $usersKey = "blog-post-{$id}-users";
+        $counter = new Counter();
+
+        // $sessionId = session()->getId();
+        // $counterKey = "blog-post-{$id}-counter";
+        // $usersKey = "blog-post-{$id}-users";
 
         // $users = Cache::tags(['blog-post'])->get($usersKey,[]);
         // $usersUpdate = [];
@@ -206,27 +209,27 @@ class PostsController extends Controller
 
         // $counter = Cache::tags(['blog-post'])->get($counterKey);
 
-        $cacheName = "blog-post-{$id}-users";
-        $session_id = session()->getId();
-        $now = now();
+        // $cacheName = "blog-post-{$id}-users";
+        // $session_id = session()->getId();
+        // $now = now();
         
-        $users = Cache::tags(['blog-post'])->get($cacheName, []);
-        $users[$session_id] = $now;
+        // $users = Cache::tags(['blog-post'])->get($cacheName, []);
+        // $users[$session_id] = $now;
         
-        $updatedUsers = [];
+        // $updatedUsers = [];
         
-        foreach($users as $session => $lastVisit){
-            if($now->diffInMinutes($lastVisit) < 1 ){
-                $updatedUsers[$session] = $lastVisit;
-            }
-        }
+        // foreach($users as $session => $lastVisit){
+        //     if($now->diffInMinutes($lastVisit) < 1 ){
+        //         $updatedUsers[$session] = $lastVisit;
+        //     }
+        // }
         
-        Cache::tags(['blog-post'])->forever($cacheName, $updatedUsers);
-        $counter = count($updatedUsers);
+        // Cache::tags(['blog-post'])->forever($cacheName, $updatedUsers);
+        // $counter = count($updatedUsers);
 
         return view('posts.show',[
             'post'=> $blogPost,
-            'counter' => $counter,
+            'counter' => $counter->increment("blog-post-{$id}",['blog-post']),
         ]);
     }
 
