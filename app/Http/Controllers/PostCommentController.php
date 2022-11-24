@@ -10,6 +10,7 @@ use App\Mail\CommentPosted;
 use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPost;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\Comment as CommentResource;
 
 //use Illuminate\Http\Request;
 
@@ -19,6 +20,14 @@ class PostCommentController extends Controller
     {
         $this->middleware('auth')->only(['store']);
     }
+
+    public function index(BlogPost $post)
+    {
+        return CommentResource::collection($post->comments()->with('user')->get());
+        //return $post->comments()->with('user')->get();
+    }
+
+
     public function store(BlogPost $post, StoreComment $request)
     {
         $comment = $post->comments()->create([
