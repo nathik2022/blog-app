@@ -18,7 +18,8 @@ class PostCommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['store']);
+        $this->middleware('auth')
+            ->only(['store','create','edit','update','destroy']);
     }
 
     public function index(BlogPost $post)

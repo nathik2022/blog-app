@@ -77,7 +77,7 @@
             {{ trans_choice('messages.people.reading', $counter) }}
         </p>
         {{-- @endif --}}
-        <h4>{{ __('Comments') }}s</h4>
+        <h4>{{ __('Comments') }}</h4>
 
         {{-- @include('comments.partials.form') --}}
         {{-- @commentForm(['route'=>route('posts.comments.store',['post'=>$post->id])]) 
