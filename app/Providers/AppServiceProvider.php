@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
             return new Counter(
                 $app->make('Illuminate\Support\Facades\Cache'),
                 $app->make('Illuminate\Contracts\Session\Session'),
-                env('COUNTER_TIMEOUT')
+                intval(env('COUNTER_TIMEOUT'))
             );
         });
 
